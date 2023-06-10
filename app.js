@@ -99,15 +99,6 @@ app.post("/delete", function (req, res) {
       }
     );
   } else {
-    // ItemList.findOne({ name: "Today" }, function (err, dbItem) {
-    //   dbItem.items = dbItem.items.filter(
-    //     (element) => element.id !== checkedItemId
-    //   );
-    //   dbItem.save();
-    //   res.redirect("/");
-    // });
-
-    // USING PULL __ SHORT AND EFFICIENT
     ItemList.findOneAndUpdate(
       { name: "Today" },
       { $pull: { items: { _id: checkedItemId } } },
@@ -118,7 +109,6 @@ app.post("/delete", function (req, res) {
   }
 });
 
-// CUSTOM ROUTE
 app.get("/:customListName", function (req, res) {
   const customListName = _.capitalize(req.params.customListName);
 
